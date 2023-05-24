@@ -1,4 +1,6 @@
 import * as React from 'react';
+import axios from 'axios';
+import {config, AXIOS_URL} from '../commonFiles/axiosConfig';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -34,10 +36,15 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    const user = {
       email: data.get('email'),
-      password: data.get('password'),
-    });
+      password: data.get('password')
+    };
+
+    axios.post(`${AXIOS_URL}/adminauthentication`, user, config)
+    .then( res =>  console.log(res))
+    .catch( err =>  console.log(err));
   };
 
   return (
@@ -98,7 +105,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
