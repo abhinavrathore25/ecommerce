@@ -1,7 +1,6 @@
 import Login from "./components/admin/Login";
 import SignUp from "./components/admin/SignUp";
 import Dashboard from "./components/admin/Dashboard";
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
