@@ -23,102 +23,40 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 
-try {
-    app.get("/retrieveBugs", (req, res) => {
-        Bug.find((err, foundBugs) => {
-            if (err) {
-                res.send(err);
-                console.log(err);
-            }
-            else {
-                res.send(foundBugs);
-            }
-        });
-    })
-}
-catch (error) { console.log(error.message) };
-
-  app.get("/newBugId",(req, res) => {
-    Bug.find().sort("-id").limit(1).exec((err, result) => {
-        if(err)
-            res.send(err);
-        else
-            result.length !==0 ? res.send((result[0].id).toString()) : res.send("0");
-    });
-})
-
-.post("/adminauthentication", (req, res) => {
+app.post("/adminauthentication", (req, res) => {
 
     const adminCreds = req.body;
 
-    Admin.find((err, foundBugs) => {
-        if (err) {
-            res.send(err);
-            console.log(err);
+    Admin.findOne(adminCreds)
+    .then(resp => {
+        if(resp !== null){
+            console.log(resp);
+            res.send('Success');
         }
-        else {
-            res.send(foundBugs);
-        }
-    });
-    
-    // const newBug = new Bug(requestedBug);
-    // newBug.save((err) => {
-    //     if(err){
-    //         res.send(err);
-    //     }
-    //     else{
-    //         res.send("Bug added successfully");
-    //     }
-    // });
-})
-
-.delete("/deleteBug/:id", (req, res) => {
-    const bugId = req.params.id;
-
-    Bug.deleteOne({id: bugId}, (err, response) => {
-        if(err)
-            res.send(err);
         else
-            res.send("Success");
-    });
-})
-
-.patch("/updateBug", (req, res) => {
-    const newData = req.body;
-
-    Bug.updateOne(
-        {id: newData.id}, 
-        {$set:req.body},
-        (err, result) => {
-        if(err)
-            res.send(err);
-        else
-            res.send(result);
+            res.send('Faliure');
     })
-});
+    .catch(err => {
+        console.log(err);
+        res.send(`Server Error: ${err}`);
+    });
+})
+
+.post("/createUser", (req, res) => {
+    const newUser = new Admin(req.body);
+    newUser.save()
+    .then(resp => res.send('Success'))
+    .catch(err => res.send('Failure'));
+})
 
 // This route serves the React app
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, "./client/build/index.html")));
+// app.get('*', (req, res) => res.sendFile(path.join(__dirname, "./client/build/index.html")));
 
 mongoose.connection.once('open', () => {
     app.emit('ready');
 });
 
 app.on('ready', function() { 
-    
-    Bug.find((err, foundBugs) => {
-        if(err){
-            console.log("Error Retrieving Data");
-        }
-        else if(foundBugs.length === 0){
-            const fakeBugs = fakeDataGenerator();
-            Bug.insertMany(fakeBugs, function(err){
-                if(err){
-                    console.log(err);
-                }
-            })
-        }
-    });
 
     app.listen(port, () => console.log(`Server listening on port ${port}`));
 }); 

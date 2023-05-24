@@ -18,13 +18,13 @@ const intialDbConnection = () => {
 
 intialDbConnection();
 
-const admin = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     id: Number,
     username: String,
     email: String,
     password: String
 });
 
-const Admin = mongoose.model("Admin", admin);
+const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;
