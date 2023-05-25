@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import {config, AXIOS_URL} from '../commonFiles/axiosConfig';
+import { config, AXIOS_URL } from '../commonFiles/axiosConfig';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,6 +14,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux-store';
 
 function Copyright(props) {
   return (
@@ -33,6 +36,12 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
+
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector(state => state);
+  console.log(isLoggedIn);
+  const { setIsLoggedIn } = bindActionCreators(actionCreators, dispatch);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,8 +52,14 @@ export default function Login() {
     };
 
     axios.post(`${AXIOS_URL}/adminauthentication`, user, config)
-    .then( res =>  console.log(res))
-    .catch( err =>  console.log(err));
+      .then(res => {
+        console.log(res);
+        if (res.data === 'Success') {
+          setIsLoggedIn(true);
+          window.location.href = '/Dashboard';
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   return (
