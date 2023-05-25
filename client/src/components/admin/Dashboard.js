@@ -35,33 +35,45 @@ export default function ResponsiveDrawer(props) {
   const handleSubMenuToggle = () => {
     setSubMenuOpen(!isSubMenuOpen);
   };
-  const handleTableToggle = () => { };
+  const handleProduct = () => { };
+  const mainItems = [
+    {
+      icon: <CategoryIcon />,
+      text: "Catalog",
+      onClick: handleSubMenuToggle,
+      subItems: [
+        { icon: <ShoppingCartIcon />, text: "Product", onClick: handleProduct },
+      ],
+    },
+  ];
 
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        <ListItem disablePadding button onClick={handleSubMenuToggle}>
-          <ListItemIcon>
-            <CategoryIcon />
-          </ListItemIcon>
-          <ListItemText primary="Catalog" />
-        </ListItem>
-        {isSubMenuOpen && (
-          <List component="div" disablePadding>
-            <ListItem disablePadding >
-              <Link to='/Dashboard/products' className='routerLinks'>
-                <ListItemButton onClick={handleTableToggle}>
-                  <ListItemIcon>
-                    <ShoppingCartIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Product" />
-                </ListItemButton>
-              </Link>
+        {mainItems.map((mainItem, mainIndex) => (
+          <div key={mainIndex}>
+            <ListItem disablePadding button onClick={mainItem.onClick}>
+              <ListItemIcon>{mainItem.icon}</ListItemIcon>
+              <ListItemText primary={mainItem.text} />
             </ListItem>
-          </List>
-        )}
+            {isSubMenuOpen && mainItem.subItems.length > 0 && (
+              <List component="div" disablePadding>
+                {mainItem.subItems.map((subItem, subIndex) => (
+                  <ListItem disablePadding key={subIndex}>
+                  <Link to='/Dashboard/products' className='routerLinks'>
+                    <ListItemButton onClick={subItem.onClick}>
+                      <ListItemIcon>{subItem.icon}</ListItemIcon>
+                      <ListItemText primary={subItem.text} />
+                    </ListItemButton>
+                    </Link>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </div>
+        ))}
       </List>
     </div>
   );
