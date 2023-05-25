@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import {config, AXIOS_URL} from '../commonFiles/axiosConfig';
+import { config, AXIOS_URL } from '../commonFiles/axiosConfig';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -43,8 +43,12 @@ export default function Login() {
     };
 
     axios.post(`${AXIOS_URL}/adminauthentication`, user, config)
-    .then( res =>  console.log(res))
-    .catch( err =>  console.log(err));
+      .then(res => {
+        console.log(res);
+        if (res.data === 'Success')
+          window.location.href = '/Dashboard';
+      })
+      .catch(err => console.log(err));
   };
 
   return (
