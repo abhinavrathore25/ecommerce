@@ -3,6 +3,8 @@ import SignUp from "./components/admin/SignUp";
 import Dashboard from "./components/admin/Dashboard";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Product from "./components/admin/Product";
+import AddProduct from "./components/admin/AddProduct";
+
 
 function App() {
 
@@ -14,6 +16,7 @@ function App() {
           <Route path='/signUp' element={<SignUp />} />
           <Route path='/Dashboard' element={<Dashboard />} >
             <Route path='/Dashboard/products' element={<Product />} />
+            <Route path='/Dashboard/products/form' element={<AddProduct/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
