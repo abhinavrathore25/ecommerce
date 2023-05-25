@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Dashboard.css';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,6 +17,8 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { Outlet } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -32,31 +35,45 @@ export default function ResponsiveDrawer(props) {
   const handleSubMenuToggle = () => {
     setSubMenuOpen(!isSubMenuOpen);
   };
-  const handleTableToggle=()=>{};
+  const handleProduct = () => { };
+  const mainItems = [
+    {
+      icon: <CategoryIcon />,
+      text: "Catalog",
+      onClick: handleSubMenuToggle,
+      subItems: [
+        { icon: <ShoppingCartIcon />, text: "Product", onClick: handleProduct },
+      ],
+    },
+  ];
 
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        <ListItem disablePadding button onClick={handleSubMenuToggle}>
-          <ListItemIcon>
-            <CategoryIcon />
-          </ListItemIcon>
-          <ListItemText primary="Catalog" />
-        </ListItem>
-        {isSubMenuOpen && (
-          <List component="div" disablePadding>
-           <ListItem disablePadding >
-              <ListItemButton onClick={handleTableToggle}>
-                <ListItemIcon>
-                  <ShoppingCartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Product" />
-              </ListItemButton>
+        {mainItems.map((mainItem, mainIndex) => (
+          <div key={mainIndex}>
+            <ListItem disablePadding button onClick={mainItem.onClick}>
+              <ListItemIcon>{mainItem.icon}</ListItemIcon>
+              <ListItemText primary={mainItem.text} />
             </ListItem>
-          </List>
-        )}
+            {isSubMenuOpen && mainItem.subItems.length > 0 && (
+              <List component="div" disablePadding>
+                {mainItem.subItems.map((subItem, subIndex) => (
+                  <ListItem disablePadding key={subIndex}>
+                  <Link to='/Dashboard/products' className='routerLinks'>
+                    <ListItemButton onClick={subItem.onClick}>
+                      <ListItemIcon>{subItem.icon}</ListItemIcon>
+                      <ListItemText primary={subItem.text} />
+                    </ListItemButton>
+                    </Link>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </div>
+        ))}
       </List>
     </div>
   );
@@ -84,7 +101,7 @@ export default function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-              Dashboard
+            Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -124,7 +141,7 @@ export default function ResponsiveDrawer(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-       
+        <Outlet />
       </Box>
     </Box>
   );
