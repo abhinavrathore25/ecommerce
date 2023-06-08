@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,11 +10,11 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 650,
+//   },
+// });
 
 const products = [
   {
@@ -32,7 +32,7 @@ const products = [
 ];
 
 export default function Product() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>
@@ -47,7 +47,9 @@ export default function Product() {
       </Button>
     </Link>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="Product table">
+        <Table 
+        // className={classes.table} 
+        aria-label="Product table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>

@@ -52,6 +52,13 @@ export default function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
+
+        <Link to='/Dashboard' className='routerLinks'>
+          <ListItem disablePadding button onClick={mainItems.onClick}>
+            <ListItemIcon>{mainItems[0].icon}</ListItemIcon>
+            <ListItemText primary='Dashboard' />
+          </ListItem>
+        </Link>
         {mainItems.map((mainItem, mainIndex) => (
           <div key={mainIndex}>
             <ListItem disablePadding button onClick={mainItem.onClick}>
@@ -62,11 +69,11 @@ export default function ResponsiveDrawer(props) {
               <List component="div" disablePadding>
                 {mainItem.subItems.map((subItem, subIndex) => (
                   <ListItem disablePadding key={subIndex}>
-                  <Link to='/Dashboard/products' className='routerLinks'>
-                    <ListItemButton onClick={subItem.onClick}>
-                      <ListItemIcon>{subItem.icon}</ListItemIcon>
-                      <ListItemText primary={subItem.text} />
-                    </ListItemButton>
+                    <Link to='/Dashboard/products' className='routerLinks'>
+                      <ListItemButton onClick={subItem.onClick}>
+                        <ListItemIcon>{subItem.icon}</ListItemIcon>
+                        <ListItemText primary={subItem.text} />
+                      </ListItemButton>
                     </Link>
                   </ListItem>
                 ))}
@@ -81,7 +88,7 @@ export default function ResponsiveDrawer(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' ,height: '100%'}}>
       <CssBaseline />
       <AppBar
         position="fixed"

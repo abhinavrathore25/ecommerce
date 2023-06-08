@@ -89,6 +89,7 @@ export default function Login() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              defaultValue='abhinavrathore.ar@gmail.com'
               autoFocus
             />
             <TextField
@@ -100,6 +101,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              defaultValue='rathore'
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

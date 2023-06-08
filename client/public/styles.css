@@ -1,0 +1,11 @@
+:root{
+    --dashboardCardColor: rgba(53, 162, 235, 0.5);
+    --dashboardCardBorderColor: rgba(53, 162, 235, 0.6);
+    --dashboardBackgroundColor: rgb(197,190,222);
+    /* --dashboardCardColor: #ffb1c1; */
+}
+
+html, body, #root, .App{
+    height: 100%;
+    width: 100%;
+}

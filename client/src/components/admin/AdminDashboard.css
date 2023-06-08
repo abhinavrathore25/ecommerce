@@ -1,0 +1,68 @@
+.adminDashboardContainer {
+    display: grid;
+    /* background-color: #f1c40f; */
+    /* background-image: linear-gradient(135deg, #24186e, #9e4ff9, #22a4e0); */
+    border-radius: 10px;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
+    width: 100%;
+    height: calc(100% - 65px);
+    padding: 20px;
+}
+
+.dashboardCardConatainer {
+    display: flex;
+    grid-column: 1/3;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.dashboardChartContainer,
+.dashboardTableContainer {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 5px 0;
+    width: 98%;
+}
+
+.dashboardCard {
+    align-items: center;
+    background-color: var(--color);
+    border-radius: 10px;
+    color: rgba(0, 0, 0, 0.7);
+    display: inline-flex;
+    flex-direction: column;
+    height: 150px;
+    position: relative;
+    text-align: center;
+    width: 150px;
+    box-shadow: 1px 1px var(--dashboardBackgroundColor), 3px 3px 8px -5px #000;
+}
+
+.card-angle{
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+.dashboardCard>h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.dashboardCard>p {
+    font-size: 1.3rem;
+}
+
+.dashboardCard hr:nth-child(2) {
+    width: 100%;
+    margin: 0;
+}
+
+.dashboardCard hr:nth-child(4) {
+    width: 100%;
+    margin: 0;
+}
