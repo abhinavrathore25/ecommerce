@@ -36,15 +36,17 @@ const rows = [
 
 const RecentOrdersTable = () => {
     return (
-        <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-                pagination: {
-                    paginationModel: { page: 0, pageSize: 4 },
-                },
-            }}
-        />
+        <div style={{height: '318px'}}>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                    pagination: {
+                        paginationModel: { page: 0, pageSize: 4 },
+                    },
+                }}
+            />
+        </div>
     )
 }
 
