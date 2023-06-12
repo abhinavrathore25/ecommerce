@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import './AdminDashboard.css';
 import BarChart from './BarChart';
 import RecentOrdersTable from './RecentOrdersTable';
@@ -25,8 +25,21 @@ const cardContent = [
 const cardColors = ['#F39C12', '#27AE60', '#3498DB', '#F1C40F', '#9B59B6'];
 
 const AdminDashboard = () => {
+
+    const [showCardModal, setshowCardModal] = useState(false);
+
     return (
         <div className='adminDashboardContainer'>
+            
+            {
+                showCardModal &&
+                <div className='dashboardCardModal'>
+                    <button className='modalCloseButton' onClick={() => setshowCardModal(false)}>
+                        X
+                    </button>
+                </div>
+            }
+
             <div className='dashboardCardConatainer'>
                 {cardContent.map((content, index) => {
                     return (
@@ -36,7 +49,9 @@ const AdminDashboard = () => {
                             <hr />
                             <p>{content.value}</p>
                             <hr />
-                            <i className="fa-solid fa-angles-right card-angle"></i>
+                            <button className='card-angle-button' onClick={() => setshowCardModal(true)}>
+                                <i className="fa-solid fa-angles-right card-angle"></i>
+                            </button>
                         </div>
                     )
                 })}
