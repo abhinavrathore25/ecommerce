@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import { Outlet } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  
+
   grid1: {
     color: 'antiquewhite',
-    display:'flex', 
-    alignItems:'center', 
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'flex-end',
     height: '59px',
     textAlign: 'center',
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
 
   grid2: {
     height: '59px',
-    textAlign: 'center' 
+    textAlign: 'center'
   },
 
   grid3: {
@@ -47,35 +48,36 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
 
-  const handleLoginButtonClick = () => {
-    setIsLoginFormVisible(true);
-  };
-
-  return(
+  return (
     <Box sx={{ flexGrow: 2 }}>
-        <Grid>
-          <Grid item xs={12}>
-            <Item>
-            <div className = {classes.grid1}>
-               Welcome To The App
-              <Button className = {classes.SignInButton} href="" onClick={handleLoginButtonClick}>Sign In</Button>
-              <Button className = {classes.SignInButton} href="">Sing UP</Button>
-            </div>
-            </Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item className = {classes.grid2}>
+      <Grid>
+        <Grid item xs={12}>
+          <Item>
+            <div className={classes.grid1}>
+              Welcome To The App
+              <Link to='/customerLogin'>
+                <Button className={classes.SignInButton} href="">Sign In</Button>
+              </Link>
 
-            </Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item className = {classes.grid3}>
-              
-            </Item>
-          </Grid>
+              <Link to='customerSignup'>
+                <Button className={classes.SignInButton} href="">Sing UP</Button>
+              </Link>
+
+            </div>
+          </Item>
         </Grid>
+        <Grid item xs={12}>
+          <Item className={classes.grid2}>
+          
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item className={classes.grid3}>
+            <Outlet />
+          </Item>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

@@ -22,10 +22,10 @@ export default function Dashboard() {
             </form>
             <div class="option">or Connect With Social Media</div>
             <div class="twitter">
-                <a href="#"><i class="fab fa-twitter"></i>Sign in With Twitter</a>
+                <a href="/#"><i class="fab fa-twitter"></i>Sign in With Twitter</a>
             </div>
             <div class="facebook">
-                <a href="#"><i class="fab fa-facebook-f"></i>Sign in With Facebook</a>
+                <a href="/#"><i class="fab fa-facebook-f"></i>Sign in With Facebook</a>
             </div>
             </div>
         </div>
