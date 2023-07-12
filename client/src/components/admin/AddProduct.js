@@ -20,7 +20,8 @@ export default function AddProductForm ()  {
   };
 
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+    setImage(URL.createObjectURL(event.target.files[0]));
+    console.log(image);
   };
 
   const handleAddProduct = () => {
@@ -64,8 +65,16 @@ export default function AddProductForm ()  {
         id="image-upload"
         type="file"
         onChange={handleImageChange}
-        style={{ display: 'none' }}
+        // style={{ display: 'none' }}
       />
+      <br />
+
+      {
+        image &&
+        <img src={image} alt='uploaded' style={{ width: '200px', height: '300px' }} />
+      }
+      <br />
+
       <label htmlFor="image-upload">
         <Button variant="contained" color="primary" component="span">
           Upload Image
